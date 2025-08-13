@@ -34,22 +34,17 @@ jobs:
         cd ${{ matrix.app }}
         npm install
 
+    - name: Run ESLint for code quality test
+      run: |
+        cd ${{ matrix.app }}
+        npm run lint
+
     - name: Run tests
       run: |
         cd ${{ matrix.app }}
         npm test
   
-  code-quality:
-    runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v6
-      with:
-        version: v1.56.2
   
   push:
     runs-on: ubuntu-latest
