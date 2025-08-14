@@ -67,18 +67,18 @@ jobs:
     - name: Build and Push action app1
       uses: docker/build-push-action@v6
       with:
-        context: .
-        file: ./app1/Dockerfile
+        context: ./${{ matrix.app }}
+        file: ./${{ matrix.app }}/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/app1:1.${{github.run_id}}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.app }}:1.${{github.run_id}}
 
     - name: Build and Push action app2
       uses: docker/build-push-action@v6
       with:
-        context: .
-        file: ./app2/Dockerfile
+        context: ./${{ matrix.app }}
+        file: ./${{ matrix.app }}/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/app2:2.${{github.run_id}}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.app }}:2.${{github.run_id}}
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest
